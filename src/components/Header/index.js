@@ -33,7 +33,7 @@ import {
    RightArrowIcon,
    TopArrowIcon,
 } from '@/components/Icons/icons';
-import LogIn from '@/components/LogIn';
+import { useAuth } from '@/Service/Authentication';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -68,13 +68,8 @@ const MENU_ITEMS = [
    },
 ];
 
-const currentUser = false;
-
 function Header() {
-   const handelMenuChange = (menuIcon) => {
-      console.log(menuIcon);
-   };
-
+   const { isLogin } = useAuth();
    const userMenu = [
       {
          icon: <FontAwesomeIcon icon={faUser} />,
@@ -109,7 +104,7 @@ function Header() {
             </div>
             <Search />
             <div className={cx('action')}>
-               {currentUser ? (
+               {isLogin ? (
                   <>
                      <Link to={routesConfig.upload}>
                         <div className={cx('upload-icon')}>
@@ -172,8 +167,8 @@ function Header() {
                      </Link>
                   </>
                )}
-               <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handelMenuChange}>
-                  {currentUser ? (
+               <Menu items={isLogin ? userMenu : MENU_ITEMS}>
+                  {isLogin ? (
                      <Image
                         className={cx('user-avatar')}
                         src="https://i.pinimg.com/originals/2a/65/3d/2a653d923281fcd64be38a76fc70ef76.jpg"

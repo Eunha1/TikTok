@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from '@/routes/routes';
 import { DefaultLayout } from '@/layouts';
+import Authentication from './Service/Authentication';
 function App() {
    return (
       <Router>
@@ -20,9 +21,11 @@ function App() {
                         key={index}
                         path={route.path}
                         element={
-                           <Layout>
-                              <Page />
-                           </Layout>
+                           <Authentication>
+                              <Layout>
+                                 <Page />
+                              </Layout>
+                           </Authentication>
                         }
                      />
                   );

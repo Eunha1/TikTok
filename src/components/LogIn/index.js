@@ -1,12 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './LogIn.module.scss';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 import Button from '../Button';
 import { FaceBookIcon, GoogleIcon, TwitterIcon, WhatsAppIcon } from '../Icons/icons';
-import { Link } from 'react-router-dom';
 import { routesConfig } from '@/config';
+import { useAuth } from '@/Service/Authentication';
 const cx = classNames.bind(styles);
 
 function LogIn() {
+   const { login } = useAuth();
+   const navigate = useNavigate();
+   const [username, setUserName] = useState('');
+   const [password, setPassword] = useState('');
    return (
       <div className={cx('wrapper')}>
          <div className={cx('login-container')}>
@@ -16,17 +22,38 @@ function LogIn() {
                   <div className={cx('login-content')}>
                      <div className={cx('input-title')}>UserName</div>
                      <div className={cx('input-content')}>
-                        <input placeholder="Enter your username" />
+                        <input
+                           placeholder="Enter your username"
+                           value={username}
+                           onChange={(e) => setUserName(e.target.value)}
+                        />
                      </div>
                   </div>
                   <div className={cx('login-content')}>
                      <div className={cx('input-title')}>PassWord</div>
                      <div className={cx('input-content')}>
-                        <input id="password" placeholder="Enter your password" />
+                        <input
+                           type="password"
+                           placeholder="Enter your password"
+                           value={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                        />
                      </div>
                   </div>
                </form>
-               <Button primary className={cx('btn-login')}>
+
+               <Button
+                  primary
+                  className={cx('btn-login')}
+                  onClick={() => {
+                     if (username && password) {
+                        login();
+                        navigate('/');
+                     } else {
+                        alert('Please enter usernamke and password');
+                     }
+                  }}
+               >
                   Log in
                </Button>
             </div>
