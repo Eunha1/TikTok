@@ -11,8 +11,9 @@ const cx = classNames.bind(styles);
 function LogIn() {
    const { login } = useAuth();
    const navigate = useNavigate();
-   const [username, setUserName] = useState('');
+   const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
+   const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('user')) ?? []);
    return (
       <div className={cx('wrapper')}>
          <div className={cx('login-container')}>
@@ -20,12 +21,12 @@ function LogIn() {
             <div>
                <form>
                   <div className={cx('login-content')}>
-                     <div className={cx('input-title')}>UserName</div>
+                     <div className={cx('input-title')}>Email</div>
                      <div className={cx('input-content')}>
                         <input
-                           placeholder="Enter your username"
-                           value={username}
-                           onChange={(e) => setUserName(e.target.value)}
+                           placeholder="Enter your Email"
+                           value={email}
+                           onChange={(e) => setEmail(e.target.value)}
                         />
                      </div>
                   </div>
@@ -46,11 +47,18 @@ function LogIn() {
                   primary
                   className={cx('btn-login')}
                   onClick={() => {
-                     if (username && password) {
-                        login();
-                        navigate('/');
+                     if (email && password) {
+                        const check = userInfo.some((result) => {
+                           return result.email === email && result.password === password;
+                        });
+                        if (check) {
+                           login();
+                           navigate('/');
+                        } else {
+                           alert('wrong email and password');
+                        }
                      } else {
-                        alert('Please enter usernamke and password');
+                        alert('Please enter username and password');
                      }
                   }}
                >

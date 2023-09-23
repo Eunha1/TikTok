@@ -11,6 +11,7 @@ const routes = {
    commentLink: (content) => `/@${content.user.nickname}/video/${content.uuid}`,
    login: '/login',
    signup: '/signup',
+   setting: '/setting',
 };
 
 export default routes;

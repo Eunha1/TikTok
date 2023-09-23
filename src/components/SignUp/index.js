@@ -13,6 +13,7 @@ function SignUp() {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
    const [rePassword, setRePassword] = useState('');
+   const [userInfo, setUserInfo] = useState([]);
    return (
       <div className={cx('wrapper')}>
          <div className={cx('signup-container')}>
@@ -58,8 +59,14 @@ function SignUp() {
                   onClick={() => {
                      if (email && password && rePassword) {
                         if (password === rePassword) {
+                           setUserInfo((prev) => {
+                              const newInfo = [...prev, { email: email, password: password }];
+                              const newInfoJSON = JSON.stringify(newInfo);
+                              localStorage.setItem('user', newInfoJSON);
+                              return newInfo;
+                           });
                            login();
-                           navigate('/');
+                           navigate('/setting');
                         } else {
                            alert('Password and re Password are not the same ');
                         }

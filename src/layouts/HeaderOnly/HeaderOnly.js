@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './UploadLayout.module.scss';
+import styles from './HeaderOnly.module.scss';
 import Header from '@/components/Header';
 const cx = classNames.bind(styles);
 function HeaderOnly({ children }) {
