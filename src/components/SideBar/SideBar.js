@@ -18,7 +18,7 @@ const cx = classNames.bind(styles);
 
 function SideBar() {
    return (
-      <aside className={cx('wrapper')}>
+      <div className={cx('wrapper')}>
          <Menu>
             <MenuItem title="For You" to={routes.home} icon={<HomeIcon />} activeIcon={<HomeActiveIcon />} />
             <MenuItem
@@ -32,7 +32,7 @@ function SideBar() {
          </Menu>
          <FollowingAccount label="Following account" />
          <Information />
-      </aside>
+      </div>
    );
 }
 export default SideBar;
