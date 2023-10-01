@@ -4,7 +4,7 @@ import { useState, forwardRef } from 'react';
 import { PauseIcon, PlayIcon } from '@/components/Icons/icons';
 const cx = classNames.bind(styles);
 function PlayVideo(props, ref) {
-   const [isPlay, setIsPlay] = useState(false);
+   const [isPlay, setIsPlay] = useState(true);
    const { videoRef } = props;
    const handlePlay = () => {
       if (isPlay) {
